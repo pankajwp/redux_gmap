@@ -1,13 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
+import SearchBox from './containers/search_box';
+import {Provider} from 'react-redux';
+import store from './store';
 import './App.css';
 
 function App() {
   return (
     <div className="container">
-      <h1>hello</h1>     
+      <Provider store={store}>
+        <SearchBox />
+      </Provider>
     </div>
-  );
+  )
 }
 
 export default App;
