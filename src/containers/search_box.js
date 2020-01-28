@@ -1,46 +1,54 @@
-import React, {useState} from 'react'
-import {connect} from 'react-redux'
-import searchWeather from '../actions/search_weather';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import searchWeather from "../actions/search_weather";
 
-function SearchBox(props){
-    const [cityname, setCityname] = useState('');
+function SearchBox(props) {
+  const [cityname, setCityname] = useState("");
 
+  function handleType(event) {
+    setCityname(event.target.value);
+  }
 
-    function handleType(event){
-        setCityname(event.target.value)
-    }
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
 
-    return (
-        <div className="row pt-3">
-            <div className="col-lg-12">
-               <form>
-                   <div className="form-inline">
-                   <input 
-                    type="text"
-                    className="form-control mr-1"
-                    placeholder="Enter city name"
-                    onKeyDown = {handleType}
-                    />
-                    <button type="button" className="btn btn-primary" onClick={() => props.city({cityname})}>Search</button>
-                    {!props.cityWeather ? (<h2>No enterd</h2>) : (<h2>{props.cityWeather}</h2>)}
-                   </div>
-               </form>
-            </div>
-        </div>
-    )
-}
-
-const mapStateToProps = state => {
-    return {
-        cityWeather: state.cityWeather
-    }
+  return (
+    <div className="row pt-3">
+      <div className="col-lg-12">
+        <form onSubmit={handleSubmit}>
+          <div className="form-inline">
+            <input
+              type="text"
+              className="form-control mr-1"
+              placeholder="Enter city name"
+              value={cityname}
+              onChange={handleType}
+            />
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => {
+                props.city(cityname);
+                setCityname("");
+              }}
+            >
+              Search
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 const mapDispatchToProps = dispatch => {
-    return{
-        city: (cityname) => dispatch(searchWeather(cityname)),
-    }
-}
+  return {
+    city: cityname => dispatch(searchWeather(cityname))
+  };
+};
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SearchBox);

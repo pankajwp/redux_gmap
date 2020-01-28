@@ -1,12 +1,12 @@
-import {SEARCH_WEATHER} from '../actions';
+import { FETCH_WEATHER } from "../actions";
 
-function getWeather(state = null, action){
-    switch(action.type){
-        case SEARCH_WEATHER:
-            return action.payload
-        default:
-            return state
-    }
+function getWeather(state = [], action) {
+	switch (action.type) {
+		case FETCH_WEATHER:
+			return action.payload.data ? [action.payload.data, ...state] : state;
+		default:
+			return state;
+	}
 }
 
 export default getWeather;
