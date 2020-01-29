@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBox from './containers/search_box';
-import WeatherBox from './containers/weather_box';
+import WeatherBox from './containers/weather_box_graph_map';
 import {Provider} from 'react-redux';
 import store from './store';
 import './App.css';

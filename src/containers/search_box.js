@@ -11,6 +11,8 @@ function SearchBox(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    props.city(cityname);
+    setCityname("");
   }
 
   return (
@@ -26,12 +28,8 @@ function SearchBox(props) {
               onChange={handleType}
             />
             <button
-              type="button"
+              type="submit"
               className="btn btn-primary"
-              onClick={() => {
-                props.city(cityname);
-                setCityname("");
-              }}
             >
               Search
             </button>
